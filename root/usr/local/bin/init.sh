@@ -5,7 +5,7 @@ if [ ! -f /config/servers.cfg ]; then
 	exit
 fi;
 
-crontab -l | grep plex-sync-job || echo 'Installing cron job' && (crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /opt/bin/job.sh >> /var/log/cron.log 2>&1") | crontab -
+crontab -l | grep plex-sync-job || echo 'Installing cron job' && (crontab -l 2>/dev/null; echo "$CRON_SCHEDULE /usr/local/bin/job.sh >> /var/log/cron.log 2>&1") | crontab -
 
 rm -rf /tmp/DRY_RUN
 [ ! -z "$DRY_RUN" ] && echo "$DRY_RUN" > /tmp/DRY_RUN
@@ -16,8 +16,8 @@ rm -rf /tmp/MATCH_TYPE
 rm -rf /tmp/RATE_LIMIT
 [ ! -z "$RATE_LIMIT" ] && echo "$RATE_LIMIT" > /tmp/RATE_LIMIT
 
-[ ! -z "$INITIAL_RUN" ] && /opt/bin/job.sh
+[ ! -z "$INITIAL_RUN" ] && /usr/local/bin/job.sh
 
 touch /var/log/cron.log
 
-rsyslogd && cron && tail -F /var/log/syslog /var/log/cron.log 2>/dev/null
+cron && tail -F /var/log/syslog /var/log/cron.log 2>/dev/null

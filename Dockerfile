@@ -10,14 +10,12 @@ ENV SECTION_MAPS=''
 ENV CRON_SCHEDULE='0 * * * *'
 ENV INITIAL_RUN=''
 
-ADD bin/ /opt/bin/
+ADD root/ /
 
 RUN apt-get update && \
-    apt-get -y -qq --force-yes install cron rsyslog host && \
+    apt-get -y -qq --force-yes install cron host && \
     npm install -g --quiet plex-sync && \
-    chmod 0755 /opt/bin/job.sh && \
-    chmod 0755 /opt/bin/init.sh && \
+    chmod 0755 /usr/local/bin/*.sh && \
     touch /var/log/cron.log
 
-ENTRYPOINT /opt/bin/init.sh
-
+ENTRYPOINT /usr/local/bin/init.sh

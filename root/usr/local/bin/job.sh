@@ -12,6 +12,8 @@ getTrueHost() {
 	echo ${NEWROOT}${CERTDOMAIN}
 }
 
+export PATH=/usr/local/bin:$PATH
+
 aryname=''
 linenb=0
 arraylist=''
@@ -64,7 +66,10 @@ for SERVER in $arraylist; do
 		PLEXSECTION1=${SECTIONMAP%%:*}
 		PLEXSECTION2=${SECTIONMAP##*:}
 		echo "Syncing $SERVER - ${PLEXTRUEHOST1}(${PLEXHOST1}):${PLEXPORT1}/${PLEXSECTION1} -> ${PLEXTRUEHOST2}(${PLEXHOST2}):${PLEXPORT2}/${PLEXSECTION2}..."
-		eval $CMDLINE plex-sync https://${PLEXTOKEN1}@${PLEXTRUEHOST1}:${PLEXPORT1}/${PLEXSECTION1} https://${PLEXTOKEN2}@${PLEXTRUEHOST2}:${PLEXPORT2}/${PLEXSECTION2}
+		FULLCMD="$CMDLINE plex-sync https://${PLEXTOKEN1}@${PLEXTRUEHOST1}:${PLEXPORT1}/${PLEXSECTION1} https://${PLEXTOKEN2}@${PLEXTRUEHOST2}:${PLEXPORT2}/${PLEXSECTION2}"
+		FULLCMD=$(echo $FULLCMD)
+		eval $FULLCMD
+
 	done
 	unset IFS
 done
