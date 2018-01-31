@@ -1,5 +1,5 @@
 # plex-sync
-Docker container for plex-sync
+Docker container for plex-sync that allows you to synchronize remote servers across the internet via SSL with dynamic DNS hostnames.
 
 Based on plex-sync from https://github.com/jacobwgillespie/plex-sync
 
