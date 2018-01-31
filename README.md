@@ -3,7 +3,7 @@ Docker container for plex-sync
 
 Based on plex-sync from https://github.com/jacobwgillespie/plex-sync
 
-## Prerequisits
+## Prerequisites
 * You will need dynamic DNS hostnames (or static) for each of your Plex servers
 * SSL must be enabled in Plex
 * You must have tokens for each user (pull from logs)
@@ -32,7 +32,7 @@ TOKEN2=XXXXXXXXXXXXXXXXXXXX
 SECTIONS=1:3|2:1
 ```
 
-This would syncronize `dynamicDNSHost1` section `1` with `dynamicDNSHost2` section `3` and `dynamicDNSHost1` section `2` with `dynamicDNSHost2` section `1` for both `myfirstuser` and `myseconduser`.
+This would synchronize `dynamicDNSHost1` section `1` with `dynamicDNSHost2` section `3` and `dynamicDNSHost1` section `2` with `dynamicDNSHost2` section `1` for both `myfirstuser` and `myseconduser`.
 
 ## Usage
 The following example is for docker-compose.
