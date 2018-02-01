@@ -62,3 +62,17 @@ Variable | Description
 `MATCH_TYPE` | Can be either `fuzzy` (default) or `precise`.  When the matching is fuzzy, the script will match items by their year and title.  When the matching is precise, the script matches items by their internal Plex GUID, which is usually the IMDb or TMDb ID.  This requires an individual API request to be performed for each item (each movie, each TV episode, etc.) and thus is very slow and can potentially overwhelm and crash the Plex server.  Use at your own risk.
 `RATE_LIMIT` | Default `5`.  If the `MATCH_TYPE` is set to `precise`, this is the maximum number of concurrent API requests `plex-sync` will make to your server to fetch GUIDs.  Use this to (potentially) alleviate performance issues with precise matching.
 
+## Getting tokens
+There are many ways to find tokens for users on your Plex server, but the easiest way is to use the included script. On your Plex host, be sure that the following two options are checked:
+- Settings -> Server -> General -> Enable Plex Media Server verbose logging
+- Settings -> Server -> General -> Allow Plex Media Server tokens in logs
+
+If not, check them and restart Plex. You will need to then wait a while for users to connect to the server before their tokens will show up in the log. Then, simply run the following on the host:
+
+```
+wget https://raw.githubusercontent.com/Fmstrat/plex-sync/master/parsetokens.sh
+chmod 755 parsetokens.sh
+./parsetokens.sh "/path/to/plex/Library/Application Support/Plex Media Server/Logs"
+```
+
+This will parse the log files and provide you a list of users and their tokens.
